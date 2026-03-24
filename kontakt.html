@@ -92,7 +92,13 @@
     <!-- SIDEBAR NAVIGATION -->
     <aside id="side-nav" class="fixed top-0 left-0 bottom-0 w-[320px] bg-surface-container-low z-50 -translate-x-full shadow-soft flex flex-col">
         <div class="p-12 h-full flex flex-col">
-            <div class="flex justify-end mb-20">
+            
+            <!-- Logo & Close Row -->
+            <div class="flex items-center justify-between mb-20">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl shrink-0">spa</span>
+                    <span class="font-headline text-xl font-bold text-primary leading-tight">Achtsam Entrümpleln</span>
+                </div>
                 <button id="close-nav" class="p-2 hover:bg-primary/5 rounded-full transition-colors">
                     <span class="material-symbols-outlined text-3xl">close</span>
                 </button>
@@ -120,8 +126,12 @@
                 </div>
                 <span class="hidden sm:block font-label text-xs uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Menü</span>
             </button>
-            <a href="index.html" class="block">
-                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary hover:opacity-70 transition-opacity">Achtsam Entrümpleln</h1>
+            <!-- Logo (Immer sichtbar) -->
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined text-primary text-2xl lg:text-3xl shrink-0">spa</span>
+                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary">
+                    Achtsam Entrümpleln
+                </h1>
             </a>
         </div>
         <!-- Button versteckt auf Kontaktseite, da wir bereits dort sind -->
@@ -182,13 +192,17 @@
 
                     <p class="text-[0.65rem] text-center opacity-40 pt-4 leading-relaxed">
                         Hinweis: Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. <br>
-                        Weitere Informationen finden Sie in der <a href="#" class="underline">Datenschutzerklärung</a>.
+                        Weitere Informationen finden Sie in der <a href="datenschutz.html" class="underline">Datenschutzerklärung</a>.
                     </p>
                 </form>
 
                 <!-- Footer-Fallback für Mobile (da nicht scrollbar) -->
-                <div class="mt-12 lg:hidden text-center opacity-30 text-[0.65rem] uppercase tracking-widest">
-                    &copy; 2026 Achtsam Entrümpeln
+                <div class="mt-12 lg:hidden text-center opacity-30 text-[0.65rem] uppercase tracking-widest space-y-2">
+                    <div>&copy; 2026 Achtsam Entrümpeln</div>
+                    <div class="flex justify-center gap-4">
+                        <a href="impressum.html" class="hover:text-primary">Impressum</a>
+                        <a href="datenschutz.html" class="hover:text-primary">Datenschutz</a>
+                    </div>
                 </div>
             </div>
         </section>

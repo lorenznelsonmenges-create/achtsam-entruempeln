@@ -89,8 +89,12 @@
     <aside id="side-nav" class="fixed top-0 left-0 bottom-0 w-[320px] bg-surface-container-low z-50 -translate-x-full shadow-soft flex flex-col">
         <div class="p-12 h-full flex flex-col">
             
-            <!-- Close Button -->
-            <div class="flex justify-end mb-20">
+            <!-- Logo & Close Row -->
+            <div class="flex items-center justify-between mb-20">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl shrink-0">spa</span>
+                    <span class="font-headline text-xl font-bold text-primary leading-tight">Achtsam Entrümpleln</span>
+                </div>
                 <button id="close-nav" class="p-2 hover:bg-primary/5 rounded-full transition-colors">
                     <span class="material-symbols-outlined text-3xl">close</span>
                 </button>
@@ -143,8 +147,9 @@
             </button>
 
             <!-- Logo (Immer sichtbar) -->
-            <a href="index.html" class="block">
-                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary hover:opacity-70 transition-opacity">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined text-primary text-2xl lg:text-3xl shrink-0">spa</span>
+                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary">
                     Achtsam Entrümpleln
                 </h1>
             </a>
@@ -189,7 +194,7 @@
             </section>
 
             <!-- ATEMZUG SEKTION -->
-            <section class="py-48 lg:py-72 px-8 bg-surface-container-low flex justify-center items-center text-center">
+            <section class="py-32 lg:py-48 px-8 bg-surface-container-low flex justify-center items-center text-center">
                 <div class="max-w-3xl">
                     <p class="font-headline text-3xl lg:text-5xl italic font-light leading-relaxed opacity-90">
                         &bdquo;Platz schaffen bedeutet nicht nur, Dinge wegzugeben. Es bedeutet, der Seele wieder Luft zum Atmen zu geben.&ldquo;
@@ -202,10 +207,9 @@
                 <div class="max-w-6xl mx-auto">
                     <div class="grid lg:grid-cols-2 gap-24 items-center">
                         <div class="order-2 lg:order-1">
-                            <div class="aspect-square bg-surface-container-highest rounded-full overflow-hidden relative">
-                                <img src="http://googleusercontent.com/profile/picture/2" data-alt="Hände, die achtsam ein altes Fotoalbum halten" class="w-full h-full object-cover mix-blend-multiply opacity-80">
-                            </div>
-                        </div>
+                            <div class="aspect-square bg-surface-container-highest rounded-full overflow-hidden relative flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-[28rem]">spa</span>
+                            </div>                        </div>
                         <div class="order-1 lg:order-2">
                             <h3 class="font-headline text-4xl lg:text-6xl mb-8">Ein sanfter Prozess.</h3>
                             <p class="text-xl font-light opacity-70 mb-12 leading-relaxed">
@@ -244,13 +248,14 @@
                                     <li><a href="index.html" class="hover:text-primary transition-colors">Startseite</a></li>
                                     <li><a href="philosophie.html" class="hover:text-primary transition-colors">Philosophie</a></li>
                                     <li><a href="ueber-mich.html" class="hover:text-primary transition-colors">Über mich</a></li>
+                                    <li><a href="kontakt.html" class="hover:text-primary transition-colors">Erstgespräch</a></li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-label text-[0.7rem] uppercase tracking-widest opacity-40 mb-6">Rechtliches</h4>
                                 <ul class="space-y-4 font-body font-light">
-                                    <li><a href="#" class="hover:text-primary transition-colors">Impressum</a></li>
-                                    <li><a href="#" class="hover:text-primary transition-colors">Datenschutz</a></li>
+                                    <li><a href="impressum.html" class="hover:text-primary transition-colors">Impressum</a></li>
+                                    <li><a href="datenschutz.html" class="hover:text-primary transition-colors">Datenschutz</a></li>
                                 </ul>
                             </div>
                         </div>

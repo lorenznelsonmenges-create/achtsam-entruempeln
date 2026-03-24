@@ -88,7 +88,13 @@
     <!-- SIDEBAR NAVIGATION -->
     <aside id="side-nav" class="fixed top-0 left-0 bottom-0 w-[320px] bg-surface-container-low z-50 -translate-x-full shadow-soft flex flex-col">
         <div class="p-12 h-full flex flex-col">
-            <div class="flex justify-end mb-20">
+            
+            <!-- Logo & Close Row -->
+            <div class="flex items-center justify-between mb-20">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl shrink-0">spa</span>
+                    <span class="font-headline text-xl font-bold text-primary leading-tight">Achtsam Entrümpleln</span>
+                </div>
                 <button id="close-nav" class="p-2 hover:bg-primary/5 rounded-full transition-colors">
                     <span class="material-symbols-outlined text-3xl">close</span>
                 </button>
@@ -116,8 +122,12 @@
                 </div>
                 <span class="hidden sm:block font-label text-xs uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Menü</span>
             </button>
-            <a href="index.html" class="block">
-                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary hover:opacity-70 transition-opacity">Achtsam Entrümpleln</h1>
+            <!-- Logo (Immer sichtbar) -->
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined text-primary text-2xl lg:text-3xl shrink-0">spa</span>
+                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary">
+                    Achtsam Entrümpleln
+                </h1>
             </a>
         </div>
         <a href="kontakt.html" class="hidden lg:flex items-center gap-3 font-label text-xs uppercase tracking-widest hover:text-primary transition-colors">Termin anfragen <span class="material-symbols-outlined text-lg">arrow_right_alt</span></a>
@@ -228,7 +238,7 @@
             </section>
 
             <!-- ATEMZUG SEKTION -->
-            <section class="py-48 lg:py-72 px-8 bg-surface-container-low flex justify-center items-center text-center">
+            <section class="py-32 lg:py-48 px-8 bg-surface-container-low flex justify-center items-center text-center">
                 <div class="max-w-3xl">
                     <p class="font-headline text-3xl lg:text-5xl italic font-light leading-relaxed opacity-90">
                         &bdquo;Nachhaltigkeit beginnt beim achtsamen Umgang mit dem, was uns bereits umgibt.&ldquo;
@@ -254,13 +264,14 @@
                                     <li><a href="index.html" class="hover:text-primary transition-colors">Startseite</a></li>
                                     <li><a href="philosophie.html" class="hover:text-primary transition-colors">Philosophie</a></li>
                                     <li><a href="ueber-mich.html" class="hover:text-primary transition-colors">Über mich</a></li>
+                                    <li><a href="kontakt.html" class="hover:text-primary transition-colors">Erstgespräch</a></li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-label text-[0.7rem] uppercase tracking-widest opacity-40 mb-6">Rechtliches</h4>
                                 <ul class="space-y-4 font-body font-light">
-                                    <li><a href="#" class="hover:text-primary transition-colors">Impressum</a></li>
-                                    <li><a href="#" class="hover:text-primary transition-colors">Datenschutz</a></li>
+                                    <li><a href="impressum.html" class="hover:text-primary transition-colors">Impressum</a></li>
+                                    <li><a href="datenschutz.html" class="hover:text-primary transition-colors">Datenschutz</a></li>
                                 </ul>
                             </div>
                         </div>
