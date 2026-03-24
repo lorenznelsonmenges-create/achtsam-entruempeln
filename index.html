@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achtsam Entrümpleln — Raum für Klarheit</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'surface': '#fbf9f3',
+                        'surface-container-low': '#f5f4ec',
+                        'surface-container-lowest': '#ffffff',
+                        'surface-container-highest': '#e3e3d9',
+                        'surface-dim': '#dadbd0',
+                        'primary': '#526447',
+                        'primary-container': '#d4e9c4',
+                        'on-surface': '#31332c',
+                        'on-primary': '#ecffdd',
+                        'outline-variant': '#b2b3a9',
+                    },
+                    fontFamily: {
+                        'headline': ['Noto Serif', 'serif'],
+                        'body': ['Manrope', 'sans-serif'],
+                        'label': ['Manrope', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'tightest': '-.02em',
+                        'widest': '.1em',
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px rgba(49, 51, 44, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fbf9f3;
+            color: #31332c;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        #side-nav {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .nav-open #side-nav {
+            transform: translateX(0);
+        }
+
+        @media (min-width: 1024px) {
+            #side-nav {
+                transform: translateX(-100%);
+            }
+            .nav-open #main-content {
+                margin-left: 320px;
+                transition: margin-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+    <!-- OVERLAY -->
+    <div id="nav-overlay" class="fixed inset-0 bg-on-surface/5 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-500"></div>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside id="side-nav" class="fixed top-0 left-0 bottom-0 w-[320px] bg-surface-container-low z-50 -translate-x-full shadow-soft flex flex-col">
+        <div class="p-12 h-full flex flex-col">
+            
+            <!-- Close Button -->
+            <div class="flex justify-end mb-20">
+                <button id="close-nav" class="p-2 hover:bg-primary/5 rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-3xl">close</span>
+                </button>
+            </div>
+
+            <!-- Main Menu (Ohne Nummerierung) -->
+            <nav class="flex-grow">
+                <ul class="space-y-10">
+                    <li>
+                        <a href="index.html" class="group flex flex-col">
+                            <span class="font-headline text-3xl group-hover:translate-x-2 transition-transform duration-300 group-hover:text-primary">Startseite</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="philosophie.html" class="group flex flex-col">
+                            <span class="font-headline text-3xl group-hover:translate-x-2 transition-transform duration-300 group-hover:text-primary">Philosophie</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="leistungen.html" class="group flex flex-col">
+                            <span class="font-headline text-3xl group-hover:translate-x-2 transition-transform duration-300 group-hover:text-primary">Leistungen</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="kontakt.html" class="group flex flex-col">
+                            <span class="font-headline text-3xl group-hover:translate-x-2 transition-transform duration-300 group-hover:text-primary">Erstgespräch</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Bottom Note -->
+            <div class="mt-auto pt-12">
+                <p class="text-[0.75rem] font-body font-light opacity-50 leading-relaxed italic">
+                    „Ordnung ist kein Ziel, sondern ein Weg zu mehr Lebensqualität.“
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-8 lg:px-12 py-8 bg-surface/80 backdrop-blur-md">
+        <div class="flex items-center gap-8 lg:gap-16">
+            <!-- Menu Toggle -->
+            <button id="open-nav" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center group-hover:bg-primary-container transition-colors duration-300">
+                    <span class="material-symbols-outlined">menu</span>
+                </div>
+                <span class="hidden sm:block font-label text-xs uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Menü</span>
+            </button>
+
+            <!-- Logo (Immer sichtbar) -->
+            <a href="index.html" class="block">
+                <h1 class="font-headline text-xl lg:text-2xl font-bold leading-tight text-primary hover:opacity-70 transition-opacity">
+                    Achtsam Entrümpleln
+                </h1>
+            </a>
+        </div>
+        
+        <a href="kontakt.html" class="hidden lg:flex items-center gap-3 font-label text-xs uppercase tracking-widest hover:text-primary transition-colors">
+            Termin anfragen <span class="material-symbols-outlined text-lg">arrow_right_alt</span>
+        </a>
+    </header>
+
+    <div id="main-content">
+        <main>
+            <!-- HERO SEKTION -->
+            <section id="hero" class="min-h-screen flex items-center px-8 lg:px-24 pt-32 pb-24">
+                <div class="max-w-6xl w-full mx-auto grid lg:grid-cols-12 gap-16 items-center">
+                    <div class="lg:col-span-7">
+                        <span class="font-label text-[0.7rem] uppercase tracking-[0.2em] text-primary mb-6 block">Willkommen im Raum für Klarheit</span>
+                        <h2 class="font-headline text-5xl lg:text-8xl font-bold tracking-tightest leading-[1.05] mb-10">
+                            Gemeinsam schaffen wir <span class="italic font-normal text-primary/70">Raum</span> für Neues.
+                        </h2>
+                        <p class="text-xl lg:text-2xl font-light max-w-xl mb-12 opacity-80 leading-relaxed">
+                            Entrümpeln ist ein Dialog mit sich selbst. Ich begleite Sie dabei, den Ballast der Vergangenheit sanft abzulegen.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+                            <a href="kontakt.html" class="bg-primary text-on-primary px-10 py-5 rounded-lg font-semibold tracking-wide hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
+                                Ihren Weg beginnen
+                            </a>
+                            <a href="philosophie.html" class="font-label text-xs uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1">
+                                Meine Methode entdecken
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 relative">
+                        <div class="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-soft">
+                            <img src="http://googleusercontent.com/profile/picture/1" data-alt="Ein heller, aufgeräumter Raum mit natürlichen Materialien" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-10 -left-10 bg-surface-container-lowest p-8 rounded-2xl shadow-soft max-w-[200px] hidden xl:block">
+                            <p class="font-headline italic text-primary text-lg">„Weniger Besitz, mehr Präsenz.“</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ATEMZUG SEKTION -->
+            <section class="py-48 lg:py-72 px-8 bg-surface-container-low flex justify-center items-center text-center">
+                <div class="max-w-3xl">
+                    <p class="font-headline text-3xl lg:text-5xl italic font-light leading-relaxed opacity-90">
+                        &bdquo;Platz schaffen bedeutet nicht nur, Dinge wegzugeben. Es bedeutet, der Seele wieder Luft zum Atmen zu geben.&ldquo;
+                    </p>
+                </div>
+            </section>
+
+            <!-- VORSCHAU PHILOSOPHIE -->
+            <section class="py-32 px-8 lg:px-24 bg-surface">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-24 items-center">
+                        <div class="order-2 lg:order-1">
+                            <div class="aspect-square bg-surface-container-highest rounded-full overflow-hidden relative">
+                                <img src="http://googleusercontent.com/profile/picture/2" data-alt="Hände, die achtsam ein altes Fotoalbum halten" class="w-full h-full object-cover mix-blend-multiply opacity-80">
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2">
+                            <h3 class="font-headline text-4xl lg:text-6xl mb-8">Ein sanfter Prozess.</h3>
+                            <p class="text-xl font-light opacity-70 mb-12 leading-relaxed">
+                                Warum Eile der Feind der Ordnung ist und wie wir gemeinsam ein Tempo finden, das Ihre Geschichte respektiert.
+                            </p>
+                            <a href="philosophie.html" class="inline-flex items-center gap-4 group">
+                                <span class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-all">
+                                    <span class="material-symbols-outlined">east</span>
+                                </span>
+                                <span class="font-label text-xs uppercase tracking-widest">Mehr über die Philosophie</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="py-32 px-8 lg:px-24 bg-surface-container-low rounded-t-[3rem] lg:rounded-t-[5rem]">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-12 gap-16 mb-24">
+                    <div class="lg:col-span-6">
+                        <h3 class="font-headline text-4xl lg:text-5xl font-bold mb-12">Bereit für den ersten Schritt?</h3>
+                        <p class="text-xl font-light mb-16 opacity-70">
+                            In einem kostenlosen Erstgespräch klären wir Ihre Bedürfnisse und Wünsche.
+                        </p>
+                        <a href="mailto:hallo@achtsam-entruempeln.de" class="text-2xl font-headline font-bold text-primary border-b-2 border-primary/10 hover:border-primary transition-all pb-2 inline-block">
+                            hallo@achtsam-entruempeln.de
+                        </a>
+                    </div>
+                    <div class="lg:col-span-6 lg:pl-24 flex flex-col justify-between">
+                        <div class="grid grid-cols-2 gap-12">
+                            <div>
+                                <h4 class="font-label text-[0.7rem] uppercase tracking-widest opacity-40 mb-6">Navigation</h4>
+                                <ul class="space-y-4 font-body font-light">
+                                    <li><a href="index.html" class="hover:text-primary transition-colors">Startseite</a></li>
+                                    <li><a href="philosophie.html" class="hover:text-primary transition-colors">Philosophie</a></li>
+                                    <li><a href="leistungen.html" class="hover:text-primary transition-colors">Leistungen</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-label text-[0.7rem] uppercase tracking-widest opacity-40 mb-6">Rechtliches</h4>
+                                <ul class="space-y-4 font-body font-light">
+                                    <li><a href="#" class="hover:text-primary transition-colors">Impressum</a></li>
+                                    <li><a href="#" class="hover:text-primary transition-colors">Datenschutz</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-16 border-t border-on-surface/5 flex flex-col md:row justify-between items-center gap-8 text-[0.65rem] uppercase tracking-[0.2em] opacity-40">
+                    <div>&copy; 2026 Achtsam Entrümpeln — Begleitung mit Empathie.</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const body = document.body;
+        const openNav = document.getElementById('open-nav');
+        const closeNav = document.getElementById('close-nav');
+        const overlay = document.getElementById('nav-overlay');
+
+        function toggleNav() {
+            body.classList.toggle('nav-open');
+            if (body.classList.contains('nav-open')) {
+                overlay.classList.remove('pointer-events-none');
+                overlay.classList.add('opacity-100');
+            } else {
+                overlay.classList.add('pointer-events-none');
+                overlay.classList.remove('opacity-100');
+            }
+        }
+
+        openNav.addEventListener('click', toggleNav);
+        closeNav.addEventListener('click', toggleNav);
+        overlay.addEventListener('click', toggleNav);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && body.classList.contains('nav-open')) {
+                toggleNav();
+            }
+        });
+    </script>
+
+</body>
+</html>
