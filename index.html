@@ -78,6 +78,25 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
+
+        .hover-underline {
+            position: relative;
+        }
+        
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .hover-underline:hover::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface">
@@ -155,8 +174,8 @@
             </a>
         </div>
         
-        <a href="kontakt.html" class="hidden lg:flex items-center gap-3 font-label text-xs uppercase tracking-widest hover:text-primary transition-colors">
-            Termin anfragen <span class="material-symbols-outlined text-lg">arrow_right_alt</span>
+        <a href="kontakt.html" class="hidden lg:flex items-center gap-3 font-label text-xs uppercase tracking-widest hover:text-primary transition-colors group">
+            <span class="hover-underline">Termin anfragen</span> <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
         </a>
     </header>
 
@@ -215,11 +234,8 @@
                             <p class="text-xl font-light opacity-70 mb-12 leading-relaxed">
                                 Warum Eile der Feind der Ordnung ist und wie wir gemeinsam ein Tempo finden, das Ihre Geschichte respektiert.
                             </p>
-                            <a href="philosophie.html" class="inline-flex items-center gap-4 group">
-                                <span class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-all">
-                                    <span class="material-symbols-outlined">east</span>
-                                </span>
-                                <span class="font-label text-xs uppercase tracking-widest">Mehr über die Philosophie</span>
+                            <a href="philosophie.html" class="font-label text-xs uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 inline-block">
+                                Mehr über die Philosophie
                             </a>
                         </div>
                     </div>
