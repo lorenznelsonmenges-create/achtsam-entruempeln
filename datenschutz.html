@@ -38,11 +38,9 @@
         .nav-open #side-nav { transform: translateX(0); }
         
         @media (min-width: 1024px) {
-            #main-content {
-                transition: padding-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
             .nav-open #main-content {
-                padding-left: 320px;
+                margin-left: 320px;
+                transition: margin-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             }
         }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
@@ -96,8 +94,8 @@
     </header>
 
     <div id="main-content">
-        <main class="pt-48 pb-32 px-6 lg:px-12">
-            <div class="max-w-3xl mx-auto">
+        <main class="pt-48 pb-32 px-6 lg:px-24">
+            <div class="max-w-4xl mx-auto">
                 <h2 class="font-headline text-4xl lg:text-6xl mb-16 leading-tight">Datenschutzerklärung</h2>
                 <div class="space-y-12 font-body font-light text-base lg:text-lg leading-relaxed opacity-80">
                     <section>
