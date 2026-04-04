@@ -54,7 +54,7 @@
             background-color: #fbf9f3;
             color: #31332c;
             font-family: 'Manrope', sans-serif;
-            overflow: hidden; /* Verhindert Scrolling auf dieser Seite */
+            overflow-x: hidden;
         }
         
         #side-nav {
@@ -84,7 +84,7 @@
         }
     </style>
 </head>
-<body class="bg-surface text-on-surface h-screen overflow-hidden">
+<body class="bg-surface text-on-surface min-h-screen">
 
     <!-- OVERLAY -->
     <div id="nav-overlay" class="fixed inset-0 bg-on-surface/5 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-500"></div>
@@ -138,8 +138,8 @@
         <div class="hidden lg:block w-32"></div> 
     </header>
 
-    <!-- MAIN CONTENT (No-Scroll Split Screen) -->
-    <main class="h-full flex flex-col lg:flex-row pt-32">
+    <!-- MAIN CONTENT (No-Scroll Split Screen only on Desktop) -->
+    <main class="min-h-screen flex flex-col lg:flex-row pt-32 lg:pt-32">
         
         <!-- Linke Seite: Visual & Intro -->
         <section class="hidden lg:flex flex-1 bg-surface-container-low items-center justify-center px-16 relative">
@@ -159,28 +159,30 @@
         </section>
 
         <!-- Rechte Seite: Das Formular -->
-        <section class="flex-1 bg-surface flex items-center justify-center px-8 lg:px-24">
+        <section class="flex-1 bg-surface flex items-center justify-center px-6 lg:px-24 py-12 lg:py-0">
             <div class="max-w-xl w-full">
                 
-                <div class="mb-12 lg:hidden text-center">
-                    <h2 class="font-headline text-4xl font-bold mb-4 leading-tight">Termin anfragen</h2>
+                <div class="mb-10 lg:hidden text-center">
+                    <span class="font-label text-[0.6rem] uppercase tracking-[0.2em] text-primary mb-4 block">Kontakt</span>
+                    <h2 class="font-headline text-3xl font-bold mb-4 leading-tight">Termin anfragen</h2>
+                    <p class="text-base font-light opacity-70">Ein kurzes Gespräch ist oft der erste Schritt zur Entlastung.</p>
                 </div>
 
                 <form action="#" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">Vollständiger Name</label>
-                            <input type="text" placeholder="Ihre Antwort..." class="w-full" required>
+                            <input type="text" placeholder="Ihre Antwort..." class="w-full text-base" required>
                         </div>
                         <div class="space-y-2">
                             <label class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">E-Mail Adresse</label>
-                            <input type="email" placeholder="beispiel@mail.de" class="w-full" required>
+                            <input type="email" placeholder="beispiel@mail.de" class="w-full text-base" required>
                         </div>
                     </div>
                     
                     <div class="space-y-2">
                         <label class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">Anliegen & Zeitfenster</label>
-                        <textarea placeholder="Worum geht es und wann passt es Ihnen am besten?" class="w-full h-32 resize-none" required></textarea>
+                        <textarea placeholder="Worum geht es und wann passt es Ihnen am besten?" class="w-full h-32 resize-none text-base" required></textarea>
                     </div>
 
                     <div class="pt-4">
@@ -196,12 +198,12 @@
                     </p>
                 </form>
 
-                <!-- Footer-Fallback für Mobile (da nicht scrollbar) -->
-                <div class="mt-12 lg:hidden text-center opacity-30 text-[0.65rem] uppercase tracking-widest space-y-2">
+                <!-- Footer-Fallback für Mobile -->
+                <div class="mt-16 lg:hidden text-center opacity-30 text-[0.65rem] uppercase tracking-widest space-y-4 pb-8">
                     <div>&copy; 2026 Achtsam Entrümpeln</div>
-                    <div class="flex justify-center gap-4">
-                        <a href="impressum.html" class="hover:text-primary">Impressum</a>
-                        <a href="datenschutz.html" class="hover:text-primary">Datenschutz</a>
+                    <div class="flex justify-center gap-6">
+                        <a href="impressum.html" class="hover:text-primary transition-colors">Impressum</a>
+                        <a href="datenschutz.html" class="hover:text-primary transition-colors">Datenschutz</a>
                     </div>
                 </div>
             </div>
