@@ -1,4 +1,4 @@
-# Projekt-Kontext: Achtsam Entrümpeln
+# Projekt-Kontext: Wendepunkt — Raum für Neues
 
 ## 1. Das Design-System: "The Curated Sanctuary"
 Dieses Projekt folgt strengen Design-Prinzipien, um eine beruhigende, hochwertige Ästhetik ("Editorial Look") zu erzeugen.
@@ -22,8 +22,8 @@ Alle persönlichen Daten wurden aus dem Lebenslauf (27.03.2025) extrahiert:
 * **Beruf:** Diplom Sozialpädagogin
 * **Fokus:** Systemische Mediation, Biografiearbeit, Coaching.
 * **Adresse:** Egerländer Str. 9, 65232 Taunusstein
-* **Kontakt:** 0177 - 7574529 | steffi_ruf@icloud.com
-* **Profilbild:** `images/stefanie-003.jpg` (extrahiert aus PDF).
+* **Kontakt:** 0177 - 7574529 | info@wendepunkt-ruf.de
+* **Profilbild:** `images/stefanie-003.jpg`.
 
 ## 3. Technische Struktur
 * **Framework:** HTML5 + Tailwind CSS via CDN (inkl. Custom Config im `<script>` Tag).
@@ -35,9 +35,9 @@ Alle persönlichen Daten wurden aus dem Lebenslauf (27.03.2025) extrahiert:
     * `impressum.html` & `datenschutz.html`: Rechtlich vorbereitete Seiten.
 
 ## 4. Workflow & Status
-* Das Projekt ist vollständig in `/home/lorenzm/Projects/Achtsam_entruempeln/` lokalisiert.
+* Das Projekt ist lokal in `/home/lorenzm/Projects/Wendepunkt/` lokalisiert.
 * Das Git-Repository ist mit GitHub verknüpft und auf dem Stand des finalen Designs gepusht.
-* Veröffentlichung ist via GitHub Pages geplant/aktiviert.
+* Hosting erfolgt über Hetzner auf `https://wendepunkt-ruf.de`.
 
 ## Gemini Added Memories
 - Die 'target/'-Verzeichnisse im Projekt sind aktuell von der Analyse und Suche ausgeschlossen, da sie nur Build-Artefakte enthalten.
