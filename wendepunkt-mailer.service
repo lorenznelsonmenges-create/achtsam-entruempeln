@@ -1,0 +1,15 @@
+[Unit]
+Description=Wendepunkt Kontaktformular Mailer Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www/wendepunkt-website
+ExecStart=/usr/bin/python3 /var/www/wendepunkt-website/mailer.py
+Restart=always
+RestartSec=5
+EnvironmentFile=-/var/www/wendepunkt-website/.env
+
+[Install]
+WantedBy=multi-user.target
