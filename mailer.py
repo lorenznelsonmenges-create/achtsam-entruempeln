@@ -58,21 +58,26 @@ HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", 8088))
 
 
-def send_contact_email(name: str, sender_email: str, message: str) -> None:
+def send_contact_email(sender_email: str, message: str, name: str = "") -> None:
     if not SMTP_PASS or SMTP_PASS == "hier_dein_passwort_eintragen":
-        raise ValueError("SMTP_PASS ist nicht in der .env konfiguriert.")
+        raise ValueError("SMTP_PASS ist nicht in der .env konfiguriert (Passwort ist leer oder noch der Platzhalter).")
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"Neue Terminanfrage von {name} (Wendepunkt Website)"
+    if name:
+        msg["Subject"] = f"Neue Terminanfrage von {name} (Wendepunkt Website)"
+        msg["Reply-To"] = formataddr((name, sender_email))
+    else:
+        msg["Subject"] = "Neue Terminanfrage (Wendepunkt Website)"
+        msg["Reply-To"] = sender_email
+
     msg["From"] = formataddr(("Wendepunkt Kontaktformular", SMTP_USER))
     msg["To"] = MAIL_TO
-    msg["Reply-To"] = formataddr((name, sender_email))
     msg["Date"] = formatdate(localtime=True)
 
+    name_row_text = f"Name: {name}\n" if name else ""
     text_body = f"""Neue Terminanfrage über die Website wendepunkt-ruf.de
 
-Name: {name}
-E-Mail: {sender_email}
+{name_row_text}E-Mail: {sender_email}
 Datum: {formatdate(localtime=True)}
 
 Anliegen & Zeitfenster:
@@ -80,9 +85,10 @@ Anliegen & Zeitfenster:
 {message}
 ----------------------------------------
 
-(Hinweis: Sie können direkt auf diese E-Mail antworten, um an {name} ({sender_email}) zu schreiben.)
+(Hinweis: Sie können direkt auf diese E-Mail antworten, um an {sender_email} zu schreiben.)
 """
 
+    name_row_html = f'<div class="meta-row"><span class="meta-label">Name:</span> <strong>{name}</strong></div>' if name else ""
     html_body = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -106,14 +112,14 @@ Anliegen & Zeitfenster:
       <div style="font-size: 13px; color: #666;">Eingegangen über die Website wendepunkt-ruf.de</div>
     </div>
     <div class="meta">
-      <div class="meta-row"><span class="meta-label">Name:</span> <strong>{name}</strong></div>
+      {name_row_html}
       <div class="meta-row"><span class="meta-label">E-Mail:</span> <a href="mailto:{sender_email}">{sender_email}</a></div>
       <div class="meta-row"><span class="meta-label">Datum:</span> {formatdate(localtime=True)}</div>
     </div>
     <div><strong>Anliegen &amp; Zeitfenster:</strong></div>
     <div class="message-box">{message}</div>
     <div class="footer">
-      Sie können direkt auf diese E-Mail antworten, um {name} zu kontaktieren.
+      Sie können direkt auf diese E-Mail antworten, um {sender_email} zu kontaktieren.
     </div>
   </div>
 </body>
@@ -169,24 +175,25 @@ class ContactHandler(BaseHTTPRequestHandler):
             # Spam-Schutz (Honeypot-Feld)
             # Wenn ein Bot das unsichtbare 'website'-Feld ausfüllt, antworten wir mit Erfolg, versenden aber nichts.
             if data.get("website"):
-                print("Spam-Bot erkannt (Honeypot ausgelöst). Mail wird verworfen.")
+                print("Spam-Bot erkannt (Honeypot ausgelöst). Mail wird verworfen.", flush=True)
                 self._send_json(200, {"success": True, "message": "Anfrage übermittelt."})
                 return
 
-            name = (data.get("name") or "").strip()
             email = (data.get("email") or "").strip()
             message = (data.get("message") or "").strip()
+            name = (data.get("name") or "").strip()
 
-            if not name or not email or not message:
-                self._send_json(400, {"error": "Bitte füllen Sie alle erforderlichen Felder aus."})
+            if not email or not message:
+                self._send_json(400, {"error": "Bitte füllen Sie Anliegen und E-Mail-Adresse aus."})
                 return
 
             if "@" not in email or "." not in email:
                 self._send_json(400, {"error": "Bitte geben Sie eine gültige E-Mail-Adresse ein."})
                 return
 
-            send_contact_email(name, email, message)
-            print(f"[{formatdate(localtime=True)}] E-Mail von {name} ({email}) erfolgreich versendet.")
+            send_contact_email(sender_email=email, message=message, name=name)
+            log_who = f"{name} ({email})" if name else email
+            print(f"[{formatdate(localtime=True)}] E-Mail von {log_who} erfolgreich versendet.", flush=True)
             self._send_json(200, {"success": True, "message": "Ihre Anfrage wurde erfolgreich versendet."})
 
         except ValueError as ve:

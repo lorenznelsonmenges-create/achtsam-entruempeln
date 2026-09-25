@@ -177,20 +177,16 @@
                         <input type="text" name="website" id="form-website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label for="form-name" class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">Vollständiger Name</label>
-                            <input type="text" id="form-name" name="name" placeholder="Ihre Antwort..." class="w-full text-base" required>
-                        </div>
-                        <div class="space-y-2">
-                            <label for="form-email" class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">E-Mail Adresse</label>
-                            <input type="email" id="form-email" name="email" placeholder="beispiel@mail.de" class="w-full text-base" required>
-                        </div>
-                    </div>
-                    
+                    <!-- 1. Anliegen & Zeitfenster -->
                     <div class="space-y-2">
-                        <label for="form-message" class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">Anliegen & Zeitfenster</label>
-                        <textarea id="form-message" name="message" placeholder="Worum geht es und wann passt es Ihnen am besten?" class="w-full h-32 resize-none text-base" required></textarea>
+                        <label for="form-message" class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">Anliegen &amp; Zeitfenster</label>
+                        <textarea id="form-message" name="message" placeholder="Worum geht es und wann passt es Ihnen am besten?" class="w-full h-36 resize-none text-base" required></textarea>
+                    </div>
+
+                    <!-- 2. E-Mail Adresse -->
+                    <div class="space-y-2">
+                        <label for="form-email" class="font-label text-[0.65rem] uppercase tracking-widest opacity-40 ml-1">Ihre E-Mail-Adresse für die Rückmeldung</label>
+                        <input type="email" id="form-email" name="email" placeholder="beispiel@mail.de" class="w-full text-base" required>
                     </div>
 
                     <div class="pt-4">
@@ -261,9 +257,8 @@
             statusBox.innerHTML = '';
 
             const payload = {
-                name: document.getElementById('form-name').value.trim(),
-                email: document.getElementById('form-email').value.trim(),
                 message: document.getElementById('form-message').value.trim(),
+                email: document.getElementById('form-email').value.trim(),
                 website: document.getElementById('form-website').value.trim() // Honeypot
             };
 
