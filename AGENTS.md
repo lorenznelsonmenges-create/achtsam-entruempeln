@@ -1,4 +1,4 @@
-# Projekt-Kontext: Wendepunkt — Raum für Neues
+# Projekt-Kontext: Wendepunkt — Achtsame Übergangsbegleitung
 
 ## 1. Das Design-System: "The Curated Sanctuary"
 Dieses Projekt folgt strengen Design-Prinzipien, um eine beruhigende, hochwertige Ästhetik ("Editorial Look") zu erzeugen.
