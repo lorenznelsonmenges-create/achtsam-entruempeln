@@ -17,10 +17,22 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
 
-def load_env(env_path=".env"):
+# Unbuffered Output für sofortige Anzeige in journalctl
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(line_buffering=True)
+    sys.stderr.reconfigure(line_buffering=True)
+
+script_dir = Path(__file__).resolve().parent
+
+def load_env(env_path=None):
     """Lädt Schlüssel-Wert-Paare aus einer .env-Datei."""
-    env_file = Path(env_path)
+    if env_path is None:
+        env_file = script_dir / ".env"
+    else:
+        env_file = Path(env_path)
+
     if not env_file.is_file():
+        print(f"[WARNUNG] Keine .env Datei unter {env_file} gefunden!", flush=True)
         return
     with open(env_file, "r", encoding="utf-8") as f:
         for line in f:
@@ -187,16 +199,18 @@ class ContactHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         # Sauberes Logging ohne unnötiges Rauschen
         sys.stdout.write(f"[{self.log_date_time_string()}] {self.address_string()} - {format % args}\n")
+        sys.stdout.flush()
 
 
 def run():
-    print(f"Wendepunkt Mailer startet auf http://{HOST}:{PORT} ...")
-    print(f"SMTP Server: {SMTP_SERVER}:{SMTP_PORT} | Benutzer: {SMTP_USER}")
+    pass_state = "GESETZT" if SMTP_PASS and SMTP_PASS != "hier_dein_passwort_eintragen" else "NICHT GESETZT"
+    print(f"Wendepunkt Mailer startet auf http://{HOST}:{PORT} ...", flush=True)
+    print(f"SMTP Server: {SMTP_SERVER}:{SMTP_PORT} | Benutzer: {SMTP_USER} | Passwort: {pass_state}", flush=True)
     server = HTTPServer((HOST, PORT), ContactHandler)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\nMailer wird beendet.")
+        print("\nMailer wird beendet.", flush=True)
         server.server_close()
 
 
