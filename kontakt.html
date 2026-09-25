@@ -215,6 +215,38 @@
 
     </main>
 
+    <!-- ERFOLGS-DIALOGFENSTER (MODAL) -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300">
+        <!-- Backdrop -->
+        <div id="modal-backdrop" class="fixed inset-0 bg-on-surface/30 backdrop-blur-sm transition-opacity duration-300"></div>
+
+        <!-- Dialog-Fenster -->
+        <div class="relative bg-surface rounded-[2rem] lg:rounded-[2.5rem] shadow-soft max-w-lg w-full p-8 sm:p-10 lg:p-12 text-center transform scale-95 transition-all duration-300 z-10 border border-primary/15">
+            <!-- Schließen-Kreuz -->
+            <button id="modal-close-icon" class="absolute top-5 right-5 sm:top-6 sm:right-6 p-2 rounded-full hover:bg-primary/10 text-on-surface/50 hover:text-primary transition-colors" aria-label="Schließen">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+
+            <!-- Icon -->
+            <div class="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-3xl">mark_email_read</span>
+            </div>
+
+            <!-- Text -->
+            <h3 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface mb-4">
+                Vielen Dank für Ihre Nachricht!
+            </h3>
+            <p class="font-body font-light opacity-80 text-base leading-relaxed mb-8">
+                Ihre Kontaktaufnahme wurde erfolgreich übermittelt. Ich werde mich zeitnah bei Ihnen melden.
+            </p>
+
+            <!-- Button -->
+            <button id="modal-close-btn" class="w-full sm:w-auto bg-primary text-on-primary px-10 py-4 rounded-lg font-semibold tracking-wide hover:shadow-soft hover:-translate-y-0.5 transition-all duration-300">
+                Schließen
+            </button>
+        </div>
+    </div>
+
     <script>
         const body = document.body;
         const openNav = document.getElementById('open-nav');
@@ -236,9 +268,43 @@
         closeNav.addEventListener('click', toggleNav);
         overlay.addEventListener('click', toggleNav);
 
+        // Modal Steuerung
+        const successModal = document.getElementById('success-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalCloseIcon = document.getElementById('modal-close-icon');
+
+        function openSuccessModal() {
+            successModal.classList.remove('pointer-events-none', 'opacity-0');
+            successModal.classList.add('opacity-100');
+            const card = successModal.querySelector('.relative');
+            if (card) {
+                card.classList.remove('scale-95');
+                card.classList.add('scale-100');
+            }
+        }
+
+        function closeSuccessModal() {
+            successModal.classList.remove('opacity-100');
+            successModal.classList.add('opacity-0', 'pointer-events-none');
+            const card = successModal.querySelector('.relative');
+            if (card) {
+                card.classList.remove('scale-100');
+                card.classList.add('scale-95');
+            }
+        }
+
+        modalBackdrop.addEventListener('click', closeSuccessModal);
+        modalCloseBtn.addEventListener('click', closeSuccessModal);
+        modalCloseIcon.addEventListener('click', closeSuccessModal);
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && body.classList.contains('nav-open')) {
-                toggleNav();
+            if (e.key === 'Escape') {
+                if (!successModal.classList.contains('pointer-events-none')) {
+                    closeSuccessModal();
+                } else if (body.classList.contains('nav-open')) {
+                    toggleNav();
+                }
             }
         });
 
@@ -277,9 +343,8 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    statusBox.className = 'p-5 rounded-2xl text-sm leading-relaxed bg-primary/10 text-primary border border-primary/20 block';
-                    statusBox.innerHTML = '<strong>Vielen Dank für Ihre Nachricht!</strong><br>Ihre Anfrage wurde erfolgreich übermittelt. Ich werde mich zeitnah bei Ihnen melden.';
                     form.reset();
+                    openSuccessModal();
                 } else {
                     throw new Error(data.error || 'Serverfehler beim Versand');
                 }

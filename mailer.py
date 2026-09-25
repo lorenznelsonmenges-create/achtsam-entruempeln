@@ -64,10 +64,10 @@ def send_contact_email(sender_email: str, message: str, name: str = "") -> None:
 
     msg = MIMEMultipart("alternative")
     if name:
-        msg["Subject"] = f"Neue Terminanfrage von {name} (Wendepunkt Website)"
+        msg["Subject"] = f"Neue Kontaktaufnahme von {name} (Wendepunkt Website)"
         msg["Reply-To"] = formataddr((name, sender_email))
     else:
-        msg["Subject"] = "Neue Terminanfrage (Wendepunkt Website)"
+        msg["Subject"] = "Neue Kontaktaufnahme (Wendepunkt Website)"
         msg["Reply-To"] = sender_email
 
     msg["From"] = formataddr(("Wendepunkt Kontaktformular", SMTP_USER))
@@ -75,12 +75,12 @@ def send_contact_email(sender_email: str, message: str, name: str = "") -> None:
     msg["Date"] = formatdate(localtime=True)
 
     name_row_text = f"Name: {name}\n" if name else ""
-    text_body = f"""Neue Terminanfrage über die Website wendepunkt-ruf.de
+    text_body = f"""Neue Kontaktaufnahme über die Website wendepunkt-ruf.de
 
 {name_row_text}E-Mail: {sender_email}
 Datum: {formatdate(localtime=True)}
 
-Anliegen & Zeitfenster:
+Nachricht / Anliegen:
 ----------------------------------------
 {message}
 ----------------------------------------
@@ -108,7 +108,7 @@ Anliegen & Zeitfenster:
 <body>
   <div class="card">
     <div class="header">
-      <h2>Neue Terminanfrage</h2>
+      <h2>Neue Kontaktaufnahme</h2>
       <div style="font-size: 13px; color: #666;">Eingegangen über die Website wendepunkt-ruf.de</div>
     </div>
     <div class="meta">
@@ -116,7 +116,7 @@ Anliegen & Zeitfenster:
       <div class="meta-row"><span class="meta-label">E-Mail:</span> <a href="mailto:{sender_email}">{sender_email}</a></div>
       <div class="meta-row"><span class="meta-label">Datum:</span> {formatdate(localtime=True)}</div>
     </div>
-    <div><strong>Anliegen &amp; Zeitfenster:</strong></div>
+    <div><strong>Nachricht / Anliegen:</strong></div>
     <div class="message-box">{message}</div>
     <div class="footer">
       Sie können direkt auf diese E-Mail antworten, um {sender_email} zu kontaktieren.
